@@ -94,20 +94,9 @@ extension CloudFront {
     }
 
     public enum HttpVersion: String, CustomStringConvertible, Codable {
-        case http11 = "HTTP1_1"
-        case http2 = "HTTP2"
+        case http11 = "http1.1"
+        case http2 = "http2"
         public var description: String { return self.rawValue }
-        
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.singleValueContainer()
-            let rawString = try container.decode(String.self)
-            
-            if let userType = HttpVersion(rawValue: rawString.uppercased()) {
-                self = userType
-            } else {
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot initialize HttpVersion from invalid String value \(rawString)")
-            }
-        }
     }
 
     public enum ICPRecordalStatus: String, CustomStringConvertible, Codable {
